@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect } from "react";
 
-import { API, graphqlOperation } from 'aws-amplify'
+import { API, graphqlOperation } from "aws-amplify";
 
 const query = `
   query {
@@ -10,32 +10,39 @@ const query = `
       }
     }
   }
-`
+`;
 
 interface ICat {
   id: string;
   url: string;
 }
 
-const App = () => { 
-  const [cats, setCats] = useState([])
+const App = () => {
+  const [cats, setCats] = useState([]);
 
   async function fetchGraphqlAPI() {
-    const data: any = await API.graphql(graphqlOperation(query))
-    setCats(data.data.listCats.items)
+    const data: any = await API.graphql(graphqlOperation(query));
+    setCats(data.data.listCats.items);
   }
 
   useEffect(() => {
     fetchGraphqlAPI();
   }, []);
 
-  console.log(cats)
-
   return (
     <div className="App">
-      <h1>Catmash</h1>
+      <h1>Catmash{" "}
+        <span role="img" aria-label="Cat">
+          🐈
+        </span>
+      </h1>
+      <ul>
+        {cats.map((cat: ICat) => (
+          <img key={cat.id} src={cat.url} />
+        ))}
+      </ul>
     </div>
-  )
-}
+  );
+};
 
-export default App
+export default App;
