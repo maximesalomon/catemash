@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { API, graphqlOperation } from "aws-amplify";
+import styled from 'styled-components'
 
 import Cats from './Cats'
 
@@ -31,12 +32,19 @@ const CatsContainer = () => {
         fetchGraphqlAPI();
     }, []);
     return (
-      <div>
+      <CatsContainerStyle>
           {cats.map((cat: ICat) => (
               <Cats cat={cat} />
           ))}
-      </div>
+      </CatsContainerStyle>
     )
 }
+
+const CatsContainerStyle = styled.section`
+  width: 800px;
+  height: 400px;
+  margin: 0 auto;
+  display: flex;
+`
 
 export default CatsContainer;
