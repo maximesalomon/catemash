@@ -11,9 +11,9 @@ type CatProps = {
 }
 
 const Cats = (props: CatProps) => {
-    const { id, url, rating } = props.cat
+    const { url, rating } = props.cat
     return (
-        <CatsImgStyle key={id} src={url} />
+        <CatsImgStyle src={url} alt={`Nice cat with a rating of ${rating}`}/>
     )
 }
 

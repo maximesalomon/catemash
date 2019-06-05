@@ -34,7 +34,7 @@ const CatsContainer = () => {
     return (
       <CatsContainerStyle>
           {cats.map((cat: ICat) => (
-              <Cats cat={cat} />
+              <Cats key={cat.id} cat={cat} />
           ))}
       </CatsContainerStyle>
     )
