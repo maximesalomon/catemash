@@ -1,34 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 
-import { API, graphqlOperation } from "aws-amplify";
-
-const query = `
-  query {
-    listCats {
-      items {
-        id url
-      }
-    }
-  }
-`;
-
-interface ICat {
-  id: string;
-  url: string;
-}
+import CatsContainer from './Cats/CatsContainer'
 
 const App = () => {
-  const [cats, setCats] = useState([]);
-
-  async function fetchGraphqlAPI() {
-    const data: any = await API.graphql(graphqlOperation(query));
-    setCats(data.data.listCats.items);
-  }
-
-  useEffect(() => {
-    fetchGraphqlAPI();
-  }, []);
-
   return (
     <div className="App">
       <h1>Catmash{" "}
@@ -36,11 +10,7 @@ const App = () => {
           🐈
         </span>
       </h1>
-      <ul>
-        {cats.map((cat: ICat) => (
-          <img key={cat.id} src={cat.url} />
-        ))}
-      </ul>
+      <CatsContainer/>
     </div>
   );
 };
