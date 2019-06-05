@@ -8,11 +8,18 @@ const query = `
   query {
     listCats(limit: 2) {
       items {
-        id url rating
+        ...catFields
       }
     }
   }
+
+  fragment catFields on Cat {
+    id
+    url
+    rating
+  }
 `;
+
 
 interface ICat {
   id: string;
