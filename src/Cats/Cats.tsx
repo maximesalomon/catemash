@@ -1,5 +1,7 @@
 import React from "react";
 
+import styled from 'styled-components'
+
 type CatProps = {
     cat: {
         id: string,
@@ -9,13 +11,16 @@ type CatProps = {
 }
 
 const Cats = (props: CatProps) => {
-    const { id, url, rating } = props.cat
+    const { url, rating } = props.cat
     return (
-            <>
-                <p>Rating = {rating}</p>
-                <img key={id} src={url} />
-            </>
+        <CatsImgStyle src={url} alt={`Nice cat with a rating of ${rating}`}/>
     )
 }
+
+const CatsImgStyle = styled.img`
+    width: 400px;
+    height: 400px;
+    margin: 20px;
+`
 
 export default Cats
