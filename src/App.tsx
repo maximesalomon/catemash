@@ -2,7 +2,7 @@ import React from "react";
 
 import CatsContainer from './Cats/CatsContainer'
 
-const App = () => {
+const App: React.FC = () => {
   return (
     <div className="App">
       <h1>Catmash{" "}

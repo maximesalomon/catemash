@@ -1,4 +1,5 @@
 type Cat @model {
   id: ID!
-  url: String!
+  url: String
+  rating: String
 }
