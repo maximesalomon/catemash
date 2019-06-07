@@ -1,22 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { API, graphqlOperation } from "aws-amplify";
+import * as queries from '../graphql/queries';
 import styled from 'styled-components'
 
 import Cats from './Cats';
-
-const queryCats = `
-  query {
-    getRandom(limit: 2){
-      ...catFields
-    }
-  }
-
-  fragment catFields on Cat {
-    id
-    url
-    rating
-  }
-`;
 
 interface ICat {
   id: string;
@@ -24,13 +11,14 @@ interface ICat {
   rating: string;
 }
 
-const CatsContainer = () => {
+const CatsContainer: React.FC = () => {
     const [started, setStarted] = useState(false);
     const [cats, setCats] = useState([]);
 
     async function fetchCats() {
-      const data: any = await API.graphql(graphqlOperation(queryCats));
-      console.log(data.data);
+      const data: any = await API.graphql(graphqlOperation(queries.getRandom2Cats));
+      console.log(data.data.getRandomCats);
+      setCats(data.data.getRandomCats)
     }
 
     const handleClick = () => {
