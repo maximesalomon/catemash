@@ -1,6 +1,6 @@
-export const getCat1 = `
-  query {
-    getCat(id: $id){
+export const getCat1 = (id) => { return `
+  query GetCat1 {
+    getCat(id: "${id}"){
       ...catFields
     }
   }
@@ -10,11 +10,11 @@ export const getCat1 = `
     url
     rating
   }
-`;
+`};
 
-export const getCat2 = `
-  query {
-    getCat(id: $id){
+export const getCat2 = (id) => { return `
+  query GetCat2 {
+    getCat(id: "${id}"){
       ...catFields
     }
   }
@@ -24,4 +24,4 @@ export const getCat2 = `
     url
     rating
   }
-`;
+`};

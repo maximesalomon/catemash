@@ -5,12 +5,14 @@ import styled from 'styled-components'
 type CatProps = {
         id: string,
         url: string,
-        rating: string
+        rating: number,
+        opponentRating: number,
+        showWinner: Function
 }
 
-const Cat = ({url, rating}: CatProps) => {
+const Cat = ({id, url, rating, showWinner}: CatProps) => {
     return (
-        <CatsImgStyle src={url} alt={`Nice cat with a rating of ${rating}`}/>
+        <CatsImgStyle onClick={() => showWinner(id)} src={url} alt={`Nice cat with a rating of ${rating}`}/>
     )
 }
 
