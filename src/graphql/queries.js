@@ -1,14 +1,27 @@
-export const getRandom2Cats = `
-    query Get2RandomCats {
-        # Getting 2 cats randomly from DB
-        getRandomCats(limit: 2){
-            ...catFields
-        }
+export const getCat1 = (id) => { return `
+  query GetCat1 {
+    getCat(id: "${id}"){
+      ...catFields
     }
+  }
 
   fragment catFields on Cat {
     id
     url
     rating
   }
-`;
+`};
+
+export const getCat2 = (id) => { return `
+  query GetCat2 {
+    getCat(id: "${id}"){
+      ...catFields
+    }
+  }
+
+  fragment catFields on Cat {
+    id
+    url
+    rating
+  }
+`};
