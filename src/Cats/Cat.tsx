@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 
 import styled from "styled-components";
 
@@ -12,10 +12,15 @@ type CatProps = {
 };
 
 const Cat = ({ id, url, rating, opponentId, opponentRating, updateRatings }: CatProps) => {
-    
+    const calcRatings = () => {
+        const catWinningChance = 1 / (1 + (Math.pow(10,((opponentRating-rating)/400))))
+        const updateRating = Math.round(Math.pow(32, (1 - catWinningChance)) * 100) / 100
+        updateRatings(id, (rating + updateRating) , opponentId, (rating - updateRating))
+    }
+
   return (
     <CatsImgStyle
-      onClick={() => updateRatings(id, 1023, opponentId, 977)}
+      onClick={() => calcRatings()}
       src={url}
       alt={`Nice cat with a rating of ${rating}`}
     />

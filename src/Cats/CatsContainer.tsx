@@ -44,7 +44,7 @@ const CatsContainer: React.FC = () => {
   }
 
   const updateRatings = ( winnerId: string, winnerNewScore: number, loserId: string, loserNewScore: number ) => {
-    console.log(`${winnerId} won against ${loserId}`)
+    console.log(winnerNewScore)
     mutationUpdateCatsRating(winnerId, winnerNewScore);
     mutationUpdateCatsRating(loserId, loserNewScore);
   };
