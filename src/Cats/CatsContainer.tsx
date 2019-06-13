@@ -29,9 +29,14 @@ const CatsContainer: React.FC = () => {
 
   const fetch2RandomCats = () => {
     const randomCat1: string = `${random(1, 99)}`;
-    fetchCat1(randomCat1);
     const randomCat2: string = `${random(1, 99)}`;
-    fetchCat2(randomCat2);
+    if (randomCat1 !== randomCat2) {
+      fetchCat1(randomCat1);
+      fetchCat2(randomCat2);
+    } else {
+      fetchCat1("7");
+      fetchCat2("23");
+    }
   };
 
   async function fetchCat1(id: string) {
@@ -52,7 +57,6 @@ const CatsContainer: React.FC = () => {
   ) => {
     mutationUpdateCatsRating(winnerId, winnerNewScore);
     mutationUpdateCatsRating(loserId, loserNewScore);
-    console.log(winnerId, loserId);
   };
 
   async function mutationUpdateCatsRating(id: string, rating: number) {
@@ -64,7 +68,6 @@ const CatsContainer: React.FC = () => {
       <button onClick={() => getStarted()}>Start</button>
     ) : (
       <>
-        {console.log(hasVoted)}
         <CatsContainerStyle>
           <Cat
             id={cat1.id}
