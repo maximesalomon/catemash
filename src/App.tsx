@@ -1,4 +1,5 @@
 import React from "react";
+import { Route } from "react-router-dom";
 
 import CatsContainer from "./Cats/CatsContainer";
 
@@ -11,9 +12,14 @@ const App: React.FC = () => {
           🐈
         </span>
       </h1>
-      <CatsContainer />
+      <Route path="/cats" exact component={CatsContainer} />
+      <Route path="/cats/leaderboard" exact component={Leaderboard} />
     </div>
   );
 };
+
+const Leaderboard: React.FC = () => {
+  return <h1>CAT LEADERBOARD</h1>
+}
 
 export default App;

@@ -7,11 +7,11 @@ import styled from "styled-components";
 
 import Cat from "./Cat";
 
-interface ICat {
-  id: string;
-  url: string;
-  rating: string;
-}
+// interface ICat {
+//   id: string;
+//   url: string;
+//   rating: string;
+// }
 
 const CatsContainer: React.FC = () => {
   const [started, setStarted] = useState(false);
@@ -63,7 +63,7 @@ const CatsContainer: React.FC = () => {
     await API.graphql(graphqlOperation(mutations.updateCatRating(id, rating)));
   }
 
-  const start =
+  const Catmash =
     started === false ? (
       <button onClick={() => getStarted()}>Start</button>
     ) : (
@@ -90,21 +90,20 @@ const CatsContainer: React.FC = () => {
             hasVoted={hasVoted}
           />
         </CatsContainerStyle>
-        {
-          hasVoted === true ?
-            <button
-              onClick={() => {
-                fetch2RandomCats();
-                setHasVoted(false);
-              }}
-            >
-              Next
-          </button> : null
-        }
+        {hasVoted === true ? (
+          <button
+            onClick={() => {
+              fetch2RandomCats();
+              setHasVoted(false);
+            }}
+          >
+            Next
+          </button>
+        ) : null}
       </>
     );
 
-  return start;
+  return Catmash;
 };
 
 const CatsContainerStyle = styled.section`
