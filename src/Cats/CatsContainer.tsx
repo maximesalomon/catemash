@@ -90,14 +90,17 @@ const CatsContainer: React.FC = () => {
             hasVoted={hasVoted}
           />
         </CatsContainerStyle>
-        <button
-          onClick={() => {
-            fetch2RandomCats();
-            setHasVoted(false);
-          }}
-        >
-          Next
-        </button>
+        {
+          hasVoted === true ?
+            <button
+              onClick={() => {
+                fetch2RandomCats();
+                setHasVoted(false);
+              }}
+            >
+              Next
+          </button> : null
+        }
       </>
     );
 
