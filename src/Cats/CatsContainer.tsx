@@ -17,6 +17,7 @@ const CatsContainer: React.FC = () => {
   const [started, setStarted] = useState(false);
   const [cat1, setCat1] = useState();
   const [cat2, setCat2] = useState();
+  const [hasVoted, setHasVoted] = useState(false);
 
   useEffect(() => {
     fetch2RandomCats();
@@ -43,10 +44,15 @@ const CatsContainer: React.FC = () => {
     setCat2(data.data.getCat);
   }
 
-  const updateRatings = ( winnerId: string, winnerNewScore: number, loserId: string, loserNewScore: number ) => {
-    console.log(winnerNewScore)
+  const updateRatings = (
+    winnerId: string,
+    winnerNewScore: number,
+    loserId: string,
+    loserNewScore: number
+  ) => {
     mutationUpdateCatsRating(winnerId, winnerNewScore);
     mutationUpdateCatsRating(loserId, loserNewScore);
+    console.log(winnerId, loserId);
   };
 
   async function mutationUpdateCatsRating(id: string, rating: number) {
@@ -58,6 +64,7 @@ const CatsContainer: React.FC = () => {
       <button onClick={() => getStarted()}>Start</button>
     ) : (
       <>
+        {console.log(hasVoted)}
         <CatsContainerStyle>
           <Cat
             id={cat1.id}
@@ -66,6 +73,8 @@ const CatsContainer: React.FC = () => {
             opponentId={cat2.id}
             opponentRating={cat1.rating}
             updateRatings={updateRatings}
+            setHasVoted={setHasVoted}
+            hasVoted={hasVoted}
           />
           <Cat
             id={cat2.id}
@@ -74,9 +83,18 @@ const CatsContainer: React.FC = () => {
             opponentId={cat1.id}
             opponentRating={cat1.rating}
             updateRatings={updateRatings}
+            setHasVoted={setHasVoted}
+            hasVoted={hasVoted}
           />
         </CatsContainerStyle>
-        <button onClick={() => fetch2RandomCats()}>Next</button>
+        <button
+          onClick={() => {
+            fetch2RandomCats();
+            setHasVoted(false);
+          }}
+        >
+          Next
+        </button>
       </>
     );
 

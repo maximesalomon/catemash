@@ -8,19 +8,22 @@ type CatProps = {
   rating: number;
   opponentId: string;
   opponentRating: number,
-  updateRatings: any;
+  updateRatings: any,
+  setHasVoted: any,
+  hasVoted: boolean
 };
 
-const Cat = ({ id, url, rating, opponentId, opponentRating, updateRatings }: CatProps) => {
+const Cat = ({ id, url, rating, opponentId, opponentRating, updateRatings, setHasVoted, hasVoted }: CatProps) => {
     const calcRatings = () => {
         const catWinningChance = 1 / (1 + (Math.pow(10,((opponentRating-rating)/400))))
         const updateRating = Math.round(Math.pow(32, (1 - catWinningChance)) * 100) / 100
         updateRatings(id, (rating + updateRating) , opponentId, (rating - updateRating))
+        setHasVoted(true);
     }
 
   return (
     <CatsImgStyle
-      onClick={() => calcRatings()}
+      onClick={() => hasVoted === false ? calcRatings() : null}
       src={url}
       alt={`Nice cat with a rating of ${rating}`}
     />
