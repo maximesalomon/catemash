@@ -7,11 +7,11 @@ import styled from "styled-components";
 
 import Cat from "./Cat";
 
-interface ICat {
-  id: string;
-  url: string;
-  rating: string;
-}
+// interface ICat {
+//   id: string;
+//   url: string;
+//   rating: string;
+// }
 
 const CatsContainer: React.FC = () => {
   const [started, setStarted] = useState(false);
@@ -29,9 +29,14 @@ const CatsContainer: React.FC = () => {
 
   const fetch2RandomCats = () => {
     const randomCat1: string = `${random(1, 99)}`;
-    fetchCat1(randomCat1);
     const randomCat2: string = `${random(1, 99)}`;
-    fetchCat2(randomCat2);
+    if (randomCat1 !== randomCat2) {
+      fetchCat1(randomCat1);
+      fetchCat2(randomCat2);
+    } else {
+      fetchCat1("7");
+      fetchCat2("23");
+    }
   };
 
   async function fetchCat1(id: string) {
@@ -52,19 +57,17 @@ const CatsContainer: React.FC = () => {
   ) => {
     mutationUpdateCatsRating(winnerId, winnerNewScore);
     mutationUpdateCatsRating(loserId, loserNewScore);
-    console.log(winnerId, loserId);
   };
 
   async function mutationUpdateCatsRating(id: string, rating: number) {
     await API.graphql(graphqlOperation(mutations.updateCatRating(id, rating)));
   }
 
-  const start =
+  const Catmash =
     started === false ? (
       <button onClick={() => getStarted()}>Start</button>
     ) : (
       <>
-        {console.log(hasVoted)}
         <CatsContainerStyle>
           <Cat
             id={cat1.id}
@@ -87,18 +90,20 @@ const CatsContainer: React.FC = () => {
             hasVoted={hasVoted}
           />
         </CatsContainerStyle>
-        <button
-          onClick={() => {
-            fetch2RandomCats();
-            setHasVoted(false);
-          }}
-        >
-          Next
-        </button>
+        {hasVoted === true ? (
+          <button
+            onClick={() => {
+              fetch2RandomCats();
+              setHasVoted(false);
+            }}
+          >
+            Next
+          </button>
+        ) : null}
       </>
     );
 
-  return start;
+  return Catmash;
 };
 
 const CatsContainerStyle = styled.section`
