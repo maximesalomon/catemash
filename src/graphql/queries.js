@@ -1,3 +1,5 @@
+// GET 2 RANDOM CATS QUERIES
+
 export const getCat1 = id => {
   return `
     query GetCat1 {
@@ -29,3 +31,16 @@ export const getCat2 = id => {
     }
   `;
 };
+
+// GET LIST OF CATS
+export const listCats = `
+  query {
+    listCats {
+      cats {
+        id,
+        url,
+        rating
+      }
+    }
+  }
+`;
