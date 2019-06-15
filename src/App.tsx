@@ -5,7 +5,7 @@ import CatsContainer from "./Cats/CatsContainer";
 import Leaderboard from "./Leaderboard/Leaderboard";
 
 const App: React.FC = () => {
-  const [hasSelectedPets, setHasSelectedPets] = useState(false);
+  const [hasSelectedPets, setHasSelectedPets] = useState<boolean>(false);
   return (
     <div className="App">
       <h1>
@@ -14,14 +14,16 @@ const App: React.FC = () => {
           🐈
         </span>
       </h1>
-      {
-        hasSelectedPets === false ?
-          <>
-            <Link to="/cats"><button onClick={() => setHasSelectedPets(true)}>Cats</button></Link>
-            <Link to="/cats/leaderboard"><button>Leaderboard</button></Link>
-          </>
-          : null
-      }
+      {!hasSelectedPets && (
+        <>
+          <Link to="/cats">
+            <button onClick={() => setHasSelectedPets(true)}>Cats</button>
+          </Link>
+          <Link to="/cats/leaderboard">
+            <button>Leaderboard</button>
+          </Link>
+        </>
+      )}
       <Route path="/cats" exact component={CatsContainer} />
       <Route path="/cats/leaderboard" exact component={Leaderboard} />
     </div>

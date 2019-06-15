@@ -2,6 +2,7 @@
 
 export const getCat1 = id => {
   return `
+  
     query GetCat1 {
       getCat(id: "${id}"){
         ...catFields

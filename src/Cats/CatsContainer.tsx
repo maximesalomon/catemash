@@ -7,17 +7,11 @@ import styled from "styled-components";
 
 import Cat from "./Cat";
 
-// interface ICat {
-//   id: string;
-//   url: string;
-//   rating: string;
-// }
-
 const CatsContainer: React.FC = () => {
-  const [started, setStarted] = useState(false);
+  const [started, setStarted] = useState<boolean>(false);
   const [cat1, setCat1] = useState();
   const [cat2, setCat2] = useState();
-  const [hasVoted, setHasVoted] = useState(false);
+  const [hasVoted, setHasVoted] = useState<boolean>(false);
 
   useEffect(() => {
     fetch2RandomCats();
@@ -63,45 +57,44 @@ const CatsContainer: React.FC = () => {
     await API.graphql(graphqlOperation(mutations.updateCatRating(id, rating)));
   }
 
-  const Catmash =
-    started === false ? (
-      <button onClick={() => getStarted()}>Start</button>
-    ) : (
-      <>
-        <CatsContainerStyle>
-          <Cat
-            id={cat1.id}
-            url={cat1.url}
-            rating={cat1.rating}
-            opponentId={cat2.id}
-            opponentRating={cat1.rating}
-            updateRatings={updateRatings}
-            setHasVoted={setHasVoted}
-            hasVoted={hasVoted}
-          />
-          <Cat
-            id={cat2.id}
-            url={cat2.url}
-            rating={cat2.rating}
-            opponentId={cat1.id}
-            opponentRating={cat1.rating}
-            updateRatings={updateRatings}
-            setHasVoted={setHasVoted}
-            hasVoted={hasVoted}
-          />
-        </CatsContainerStyle>
-        {hasVoted === true ? (
-          <button
-            onClick={() => {
-              fetch2RandomCats();
-              setHasVoted(false);
-            }}
-          >
-            Next
-          </button>
-        ) : null}
-      </>
-    );
+  const Catmash = !started ? (
+    <button onClick={() => getStarted()}>Start</button>
+  ) : (
+    <>
+      <CatsContainerStyle>
+        <Cat
+          id={cat1.id}
+          url={cat1.url}
+          rating={cat1.rating}
+          opponentId={cat2.id}
+          opponentRating={cat1.rating}
+          updateRatings={updateRatings}
+          setHasVoted={setHasVoted}
+          hasVoted={hasVoted}
+        />
+        <Cat
+          id={cat2.id}
+          url={cat2.url}
+          rating={cat2.rating}
+          opponentId={cat1.id}
+          opponentRating={cat1.rating}
+          updateRatings={updateRatings}
+          setHasVoted={setHasVoted}
+          hasVoted={hasVoted}
+        />
+      </CatsContainerStyle>
+      {hasVoted && (
+        <button
+          onClick={() => {
+            fetch2RandomCats();
+            setHasVoted(false);
+          }}
+        >
+          Next
+        </button>
+      )}
+    </>
+  );
 
   return Catmash;
 };

@@ -1,5 +1,5 @@
 export const updateCatRating = (id, rating) => {
-    return `
+  return `
         mutation updateCatRating {
             updateCat(input: {
                 id: "${id}",
