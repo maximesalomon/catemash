@@ -1,33 +1,57 @@
-import React, { useState } from "react";
+import React from "react";
 import { Route, Link } from "react-router-dom";
+import styled from "styled-components";
 
+import "./App.css"
+import Navbar from "./Layout/Navbar";
 import CatsContainer from "./Cats/CatsContainer";
 import Leaderboard from "./Leaderboard/Leaderboard";
 
 const App: React.FC = () => {
-  const [hasSelectedPets, setHasSelectedPets] = useState<boolean>(false);
-  return (
-    <div className="App">
-      <h1>
-        Catmash{" "}
-        <span role="img" aria-label="Cat">
-          🐈
-        </span>
-      </h1>
-      {!hasSelectedPets && (
-        <>
-          <Link to="/cats">
-            <button onClick={() => setHasSelectedPets(true)}>Cats</button>
-          </Link>
-          <Link to="/cats/leaderboard">
-            <button>Leaderboard</button>
-          </Link>
-        </>
-      )}
+  const SelectAnimal: React.FC = () => (
+    <>
+      <H2Centered>Please select an animal species</H2Centered>
+      <AnimalContainer>
+        <Link to="/cats"><AnimalImgStyle src="https://i.ibb.co/h9fn1xj/IMG-1596.jpg" /></Link>
+        <AnimalImgStyle src="https://scontent-cdt1-1.cdninstagram.com/vp/3162a7566c3445868f7a7e87898a5837/5DA3D271/t51.2885-15/e15/10914208_1599102233657037_1030665928_n.jpg?_nc_ht=scontent-cdt1-1.cdninstagram.com" />
+      </AnimalContainer>
+    </>
+  );
+
+  const routes = (
+    <>
+      <Route path="/" exact component={SelectAnimal} />
       <Route path="/cats" exact component={CatsContainer} />
       <Route path="/cats/leaderboard" exact component={Leaderboard} />
+    </>
+  );
+
+  return (
+    <div className="App">
+      <Navbar />
+      {routes}
     </div>
   );
 };
+
+export const H2Centered = styled.h2`
+  padding-top: 100px;
+  padding-bottom: 20px;
+  margin: 0 auto;
+  font-size: 20px;
+  font-family: Helvetica, Arial, sans-serif;
+  width: 300px;
+`;
+
+const AnimalContainer = styled.div`
+  width: 680px;
+  margin: 0 auto;
+`;
+
+const AnimalImgStyle = styled.img`
+  width: 300px;
+  height: 240px;
+  margin: 20px;
+`;
 
 export default App;
