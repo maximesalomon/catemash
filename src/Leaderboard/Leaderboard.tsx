@@ -25,10 +25,12 @@ const Leaderboard: React.FC = () => {
 
   return (
     <>
-      <h1>LEADERBOARD</h1>
       {cats.sort(sortDesc).map((cat: ICat, idx) => {
         return (
-          <p>{idx + 1} - <CatsImgStyle key={cat.id} src={cat.url}/> Score = {cat.rating}</p>
+          <p>
+            {idx + 1} - <CatsImgStyle key={cat.id} src={cat.url} /> Score ={" "}
+            {Math.floor(cat.rating)}
+          </p>
         );
       })}
     </>

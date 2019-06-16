@@ -58,7 +58,10 @@ const CatsContainer: React.FC = () => {
   }
 
   const Catmash = !started ? (
-    <button onClick={() => getStarted()}>Start</button>
+    <ContainerStyle>
+      <H2>Awesome! Let’s find the most amazing cat 🐈</H2>
+      <StartButton onClick={() => getStarted()}>Start</StartButton>
+    </ContainerStyle>
   ) : (
     <>
       <CatsContainerStyle>
@@ -84,14 +87,14 @@ const CatsContainer: React.FC = () => {
         />
       </CatsContainerStyle>
       {hasVoted && (
-        <button
+        <NextButton
           onClick={() => {
             fetch2RandomCats();
             setHasVoted(false);
           }}
         >
           Next
-        </button>
+        </NextButton>
       )}
     </>
   );
@@ -105,5 +108,41 @@ const CatsContainerStyle = styled.section`
   margin: 0 auto;
   display: flex;
 `;
+
+const H2 = styled.h2`
+  padding-top: 100px;
+  padding-bottom: 20px;
+  width: 420px;
+  font-size: 20px;
+  font-family: Helvetica, Arial, sans-serif;
+`;
+
+const StartButton = styled.button`
+  margin-left: 140px;
+  width: 120px;
+  height: 40px;
+  background-color: white;
+  background-repeat: no-repeat;
+  border: solid 1px lightgray;
+  cursor:pointer;
+  overflow: hidden;        
+`
+
+const NextButton = styled.button`
+  margin-top: 60px;
+  margin-left: 960px;
+  width: 120px;
+  height: 40px;
+  background-color: white;
+  background-repeat: no-repeat;
+  border: solid 1px lightgray;
+  cursor:pointer;
+  overflow: hidden;        
+`
+
+const ContainerStyle = styled.div`
+  width: 480px;
+  margin: 0 auto;
+`
 
 export default CatsContainer;
