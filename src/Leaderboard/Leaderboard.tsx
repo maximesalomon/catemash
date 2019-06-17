@@ -24,23 +24,25 @@ const Leaderboard: React.FC = () => {
   const sortDesc = (a: any, b: any) => b.rating - a.rating;
 
   return (
-    <>
+    <LeaderboardContainer>
       {cats.sort(sortDesc).map((cat: ICat, idx) => {
-        return (
-          <p>
-            {idx + 1} - <CatsImgStyle key={cat.id} src={cat.url} /> Score ={" "}
-            {Math.floor(cat.rating)}
-          </p>
-        );
+        return <CatsImgStyle key={cat.id} src={cat.url} />
       })}
-    </>
+    </LeaderboardContainer>
   );
 };
 
+
+const LeaderboardContainer = styled.div`
+  width: 600px;
+  margin: 0 auto;
+`
+
 const CatsImgStyle = styled.img`
-  max-width: 100px;
-  max-height: 100px;
-  margin: 10px;
+  display: block;
+  margin: 16px auto;
+  max-width: 320px;
+  max-height: 320px;
 `;
 
 export default Leaderboard;
