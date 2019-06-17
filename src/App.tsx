@@ -49,8 +49,8 @@ const AnimalContainer = styled.div`
 `;
 
 const AnimalImgStyle = styled.img`
-  width: 300px;
-  height: 240px;
+  max-width: 300px;
+  max-height: 300px;
   margin: 20px;
 `;
 
